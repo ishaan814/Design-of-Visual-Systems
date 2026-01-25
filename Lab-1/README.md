@@ -1,13 +1,13 @@
-# Lab 1 – Image Rotation & Shearing
+# Lab 1 - Image Rotation & Shearing
 
 This lab implements image rotation and shearing in MATLAB without using pre-existing image transformation functions. All transformations are performed using explicit mathematical operations and inverse mapping.
 
 ---
 
 ## Contents
-- `rotate.m` – Image rotation using inverse mapping
-- `shear.m` – Image shearing transformation
-- `run_lab1.m` – Script to demonstrate and test both transformations
+- `rotate.m` - Image rotation using inverse mapping
+- `shear.m` - Image shearing transformation
+- `run_lab1.m` - Script to demonstrate and test both transformations
 
 ---
 
