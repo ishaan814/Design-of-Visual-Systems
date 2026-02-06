@@ -102,6 +102,8 @@ imhist(f)      % calculate and plot the histogram
 ```
 
 The code above loads a uint8 image of grains of pollen into a variable 'f', after which we calculate and plot the histograms of the image using the imhist function.
+
+
 <img width="575" height="501" alt="image" src="https://github.com/user-attachments/assets/e1d8e293-add9-4196-89cc-462d83779490" />
 <img width="575" height="432" alt="image" src="https://github.com/user-attachments/assets/5fab7df8-3359-4e38-bf46-b13590023226" />
 
@@ -127,6 +129,7 @@ plot(g_cdf)
 ```
 
 'g_pdf' computes the probability density function (PDF) of the image by normalising the histogram, while 'g_cdf' computes the cumulative distribution function (CDF) from the PDF. We can then view the PDF and CDF side by side. 'g' over here also shows us the contrast-adjusted image.
+
 
 <img width="575" height="501" alt="image" src="https://github.com/user-attachments/assets/8b3644a7-4d87-4b91-8b1b-478d4224db16" />
 <img width="575" height="501" alt="image" src="https://github.com/user-attachments/assets/fc70f13b-9f2a-44a1-988f-697e0cf6db39" />
@@ -247,6 +250,75 @@ The image is sharpened by extracting edge information using the Laplacian and So
 ### Task 7: Challenges
 
 For this task, we have 3 challenges to complete:
-- Improve the contrast of a lake and tree image stored in the file lake&tree.png
-- Use the Sobel filter in combination with any other techniques, find the edge of the circles in the image file circles.tif.
-- Improve the lighting and colour of office.jpg, which is a colour photograph taken of an office with bad exposure.
+- Challenge 1: Improve the contrast of a lake and tree image stored in the file lake&tree.png
+- Challenge 2: Use the Sobel filter in combination with any other techniques, find the edge of the circles in the image file circles.tif.
+- Challenge 3: Improve the lighting and colour of office.jpg, which is a colour photograph taken of an office with bad exposure.
+
+#### Challenge 1: Contrast improvement
+
+For the first challenge, I will use two of the methods from this lab session and compare how they differ when improving the contrast of the 'lake&tree' image.
+
+```matlab
+imfinfo('lake&tree.png');
+f = imread('lake&tree.png');
+g1 = imadjust(f, [0 0.6], [0 1]);
+h = histeq(f,256);              % histogram equalize g
+
+montage({g1, h})
+```
+The first method I applied was using the imadjust function to manually adjust the range of pixels used based on their intensities (from 0 - 0.6), and the second method was the histogram equalisation from the end of task 3. 
+
+<img width="571" height="396" alt="image" src="https://github.com/user-attachments/assets/1bd2bc21-ad5b-4d1d-a31a-bdbc1e6d07fc" />
+
+On comparing the two images, it is clear that the second method (histogram equalisation) produces an image with better contrast. This is because while imadjust only performs a linear mapping by shifting the intensity range, it fails when data is heavily clumped in the mid-tones. histeq is better here because it uses a non-linear transformation to get a uniform distribution of the histogram.
+
+#### Challenge 2: Edge detection using Sobel & other filters
+
+```matlab
+clear all
+close all
+
+% Read image
+f = imread('circles.tif');
+
+% Convert to double for processing
+f = double(f);
+
+% Create Sobel filters
+w_sobel_x = fspecial('sobel');        % horizontal edges
+w_sobel_y = w_sobel_x';               % vertical edges
+
+% Apply Sobel filters
+gx = imfilter(f, w_sobel_x, 'replicate');
+gy = imfilter(f, w_sobel_y, 'replicate');
+
+% Combine gradients (edge strength)
+g_mag = sqrt(gx.^2 + gy.^2);
+
+% Normalise for display
+g_mag = g_mag / max(g_mag(:));
+
+% Simple threshold to get edges
+T = 0.3;                  % threshold value
+edges = g_mag > T;
+montage({uint8(f), uint8(255*edges)})
+```
+
+The code defines Sobel kernels 'w_sobel_x' for horizontal intensity changes and its transpose 'w_sobel_y' for vertical changes which are applied via imfilter with 'replicate' padding to handle boundary conditions. These directional gradients, gx and gy, are combined to calculate the gradient magnitude, which is then normalised to a [0 1] range. Finally, a global threshold (T = 0.3) is applied to create a binary mask of the strongest edges
+
+<img width="596" height="246" alt="image" src="https://github.com/user-attachments/assets/5b81fe3d-1029-4000-918c-b23ba32e19e1" />
+
+#### Challenge 3: Exposure improvement
+
+For this challenge, in order to increase the exposure of the image, we can use imadjust similar to how we have before. 
+
+```matlab
+imfinfo('office.jpg');
+f = imread('office.jpg');
+g1 = imadjust(f, [0 0.6], [0 1]);
+
+montage({uint8(f), g1})
+```
+
+The result of the following code is a much brighter image, as expected.
+<img width="596" height="386" alt="image" src="https://github.com/user-attachments/assets/f176397c-7c19-4768-95e8-3782f1a9f65d" />
