@@ -119,6 +119,8 @@ imfinfo("peppers.png");
 RGB = imread("peppers.png");
 imshow(RGB);
 ```
+
+---
 <p align="center">
 <img width="575" height="410" alt="image" src="https://github.com/user-attachments/assets/63c58a88-1069-475d-96c6-fc5d78804bb2" />
 </p>
