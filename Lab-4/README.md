@@ -37,7 +37,9 @@ Bx = [1 0 1;
 SE = strel('disk',4);
 SE.Neighborhood         % print the SE neighborhood contents
 ```
+<p align="center">
 <img width="571" height="266" alt="image" src="https://github.com/user-attachments/assets/48cc0440-21dc-4820-ae9d-d822f6ca4e2b" />
+</p>
 
 This code reads a grayscale image and applies dilation using a small cross-shaped structuring element to make the bright regions thicker. The original and processed images are displayed side by side to show the effect of dilation. It also defines other example structuring elements and displays the pixel layout of a disk-shaped structuring element.
 
@@ -55,8 +57,9 @@ E10 = imerode(A,SE10);
 E20 = imerode(A,SE20);
 montage({A, E2, E10, E20}, "size", [2 2])
 ```
+<p align="center">
 <img width="571" height="515" alt="image" src="https://github.com/user-attachments/assets/2c308dfe-2741-4ad7-83dc-f522e1eb3752" />
-
+</p>
 
 This code loads an image and applies erosion using disk-shaped structuring elements of increasing size. As the disk size increases, more of the bright areas in the image are removed. The original image and the eroded results are displayed together to compare the effect of different erosion sizes.
 
@@ -83,7 +86,9 @@ fo = imopen(f, SE);
 % Display results
 montage({f, fe, fed, fo}, 'Size', [2 2])
 ```
+<p align="center">
 <img width="571" height="411" alt="image" src="https://github.com/user-attachments/assets/c1fb69fb-4ade-4480-b1ed-1d836e9b3d2f" />
+</p>
 
 This code reads a noisy fingerprint image and applies erosion and dilation using a 3×3 structuring element. It then performs opening and displays the original image alongside the processed results to compare their effects.
 
@@ -104,9 +109,10 @@ f_gauss = imgaussfilt(uint8(f), 2);
 figure
 montage({f, foc, f_gauss}, 'Size', [1 3])
 ```
+<p align="center">
 <img width="571" height="170" alt="image" src="https://github.com/user-attachments/assets/a2b307da-d109-4fcf-ad60-8ee9690d6905" />
 <img width="571" height="170" alt="image" src="https://github.com/user-attachments/assets/fa3b92b3-b4de-4554-8c0d-8719963542db" />
-
+</p>
 
 This code applies opening and closing using a disk-shaped structuring element to further reduce noise while preserving the fingerprint pattern. It then compares the result of morphological filtering with Gaussian smoothing to show the difference between structure-preserving and blur-based noise removal.
 
@@ -138,7 +144,9 @@ BW_boundary = BW - BW_eroded;
 % Display results
 montage({I, BW, BW_eroded, BW_boundary}, 'Size', [2 2])
 ```
+<p align="center">
 <img width="571" height="515" alt="image" src="https://github.com/user-attachments/assets/a8a22d08-49c8-4ff3-83ab-8cd582070f89" />
+</p>
 
 The boundary operation successfully highlights the edges of the blobs by subtracting the eroded image from the original binary image. Some noise and broken boundaries are still visible due to thresholding and background noise. The result can be improved by applying morphological opening or closing before boundary extraction to reduce noise and smooth blob shapes.
 
@@ -182,9 +190,11 @@ g_inf_black = bwmorph(BW_black, 'thin', inf);
 figure
 montage({BW_black, g_inf_black}, 'Size', [1 2])
 ```
+
+<p align="center">
 <img width="571" height="342" alt="image" src="https://github.com/user-attachments/assets/d19a7e36-0eba-4880-8aa9-a867fc6a40c2" />
 <img width="571" height="340" alt="image" src="https://github.com/user-attachments/assets/ae2e10dd-8fc4-4950-ad6e-543322f63b99" />
-
+</p>
 
 Repeated thinning gradually reduces the fingerprint ridges to single-pixel-wide skeletons. When thinning is applied with n = inf, the image converges to its skeleton and no longer changes. Thinning and thickening are complementary operations, depending on whether the foreground is defined as white or black.
 
@@ -194,7 +204,9 @@ Repeated thinning gradually reduces the fingerprint ridges to single-pixel-wide 
 
 The goal of this task is to find the largest connected component in the image and then erase it.
 
+<p align="center">
 <img width="521" height="419" alt="image" src="https://github.com/user-attachments/assets/8380493d-0cdb-4f62-ae4e-3fee532f5fdd" />
+</p>
 
 ```matlab
 t = imread('text.png');
@@ -207,7 +219,10 @@ t(CC.PixelIdxList{idx}) = 0;
 figure
 imshow(t)
 ```
+
+<p align="center">
 <img width="521" height="419" alt="image" src="https://github.com/user-attachments/assets/86263201-c655-4c6e-a60b-bdd37560e193" />
+</p>
 
 This code finds all connected components in a binary text image and measures their sizes. It identifies the largest connected component and removes it by setting its pixels to zero. The result is displayed to show the image with the largest object removed.
 
@@ -229,7 +244,9 @@ fo = imopen(f, se);     % perform open to compare
 fr = imreconstruct(g, f);
 montage({f, g, fo, fr}, "size", [2 2])
 ```
+<p align="center">
 <img width="571" height="569" alt="image" src="https://github.com/user-attachments/assets/e20f3f91-bb16-4869-afd8-a660e021a86c" />
+</p>
 
 This code reads a black-and-white image and applies basic morphological operations. It first erodes the image (imerode) using a vertical line structuring element, then performs an opening (imopen) for comparison, and finally reconstructs the image from the eroded version (imreconstruct). All four images—the original, eroded, opened, and reconstructed—are displayed together in a 2×2 grid using montage.
 
@@ -240,7 +257,9 @@ ff = imfill(f);
 figure
 montage({f, ff})
 ```
+<p align="center">
 <img width="571" height="327" alt="image" src="https://github.com/user-attachments/assets/6b903499-3cc6-46fb-8921-433762a3950f" />
+</p>
 
 The function imfill fills the hole in the original image, allowing us to focus on the text.
 
@@ -262,7 +281,9 @@ ge = imerode(f, se);
 gg = gd - ge;
 montage({f, gd, ge, gg}, 'size', [2 2])
 ```
+<p align="center">
 <img width="580" height="544" alt="image" src="https://github.com/user-attachments/assets/6f5b4bc1-9127-4531-9922-1b04d7cced9e" />
+</p>
 
 The original CT image shows the natural grayscale of the head. Dilation brightens and expands the lighter regions, making edges more pronounced, while erosion darkens and shrinks them, reducing small bright details. The difference image highlights edges clearly, showing how morphological operations can reveal structure boundaries in grayscale images.
 
@@ -270,7 +291,7 @@ The original CT image shows the natural grayscale of the head. Dilation brighten
 
 ### Task 8: Challenges
 
-The challenge I've chosen to do for this lab is:
+The challenge I've chosen for this lab is:
 The file 'assets/normal-blood.png' is a microscope image of red blood cells. Using various techniques you have learned, write a Matlab .m script to count the number of red blood cells.
 
 In this code, we use `bwareaopen`, `imfill`, `imerode`, and `imreconstruct`, which are all morphological operations covered in Lab 4 to clean noise, fill holes, and separate connected objects. We also use `bwconncomp` and `bwboundaries` to identify and count individual red blood cells, just like we did when analysing connected components in Lab 4.
@@ -294,7 +315,7 @@ BW = imbinarize(I, level);
 % Invert to accurately count cells without background hinderance
 BW = ~BW;
 ```
-This section reads the image, converts it to grayscale if necessary, and normalizes the intensity values to a standard 0–1 range. We then enhance contrast with imadjust to make the cells stand out, binarize the image using Otsu’s method (graythresh + imbinarize), and finally invert it so the cells are foreground (white) and the background is black, which is easier for morphological operations.
+This section reads the image, converts it to grayscale if necessary, and normalises the intensity values to a standard 0–1 range. We then enhance contrast with imadjust to make the cells stand out, binarise the image using Otsu’s method (graythresh + imbinarize), and finally invert it so the cells are foreground (white) and the background is black, which is easier for morphological operations.
 
 ```matlab
 % Remove small noise blobs
@@ -331,10 +352,14 @@ disp('Number of red blood cells:');
 disp(numCells);
 ```
 
-This part identifies individual cells using bwconncomp, which finds connected foreground regions, and counts them. bwboundaries is used to extract the boundaries of each cell for visualisation. Finally, the code displays the original image with red outlines over the RBCs and prints the total number of red blood cells.
+This part identifies individual cells using bwconncomp, which finds connected foreground regions and counts them. bwboundaries is used to extract the boundaries of each cell for visualisation. Finally, the code displays the original image with red outlines over the RBCs and prints the total number of red blood cells.
 
 The final outlined image, which is used to count the cells, is as follows:
+<p align="center">
 <img width="734" height="582" alt="image" src="https://github.com/user-attachments/assets/30d22fdd-c1b0-4105-aea3-50dec64faefa" />
+</p>
+
+**Note:** The image above, which gives us the final result, indicates 39 cells. However, when performing a manual count, we observe that the imfill function doesn't work perfectly for all cells and counts the insides/intersections of cells roughly 9 times. This means that the final result of our code should be 30 cells instead of 39.
 
 ---
 
