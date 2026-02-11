@@ -120,7 +120,6 @@ RGB = imread("peppers.png");
 imshow(RGB);
 ```
 
----
 <p align="center">
 <img width="575" height="410" alt="image" src="https://github.com/user-attachments/assets/63c58a88-1069-475d-96c6-fc5d78804bb2" />
 </p>
@@ -157,3 +156,4 @@ This code loads an image (peppers.png) and shows it in different ways so you can
 After that, the code splits the image into its red, green, and blue colour channels and displays them next to each other so you can see how much of each colour is present. 
 
 Finally, it converts the image into HSV colour space and shows the hue, saturation, and value channels separately, which helps explain colour in terms of type of colour, colour strength, and brightness.
+---
