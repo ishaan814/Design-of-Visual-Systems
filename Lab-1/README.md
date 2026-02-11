@@ -68,8 +68,9 @@ end
 end
 
 ```
+<p align="center">
 <img width="361" height="218" alt="image" src="https://github.com/user-attachments/assets/385c7b93-09aa-4421-98a0-1d1ac8df8a03" />
-
+</p>
 
 This final part checks whether the mapped source pixel lies inside the image boundaries. If it falls outside, the output pixel is set to black; otherwise, the corresponding pixel value is copied from the input image. This prevents indexing errors and defines the background of the rotated image.
 
@@ -131,8 +132,10 @@ end
 end
 
 ```
-<img width="361" height="218" alt="image" src="https://github.com/user-attachments/assets/cb111b7d-a316-4cb7-82d2-4978ab03d556" />
 
+<p align="center">
+<img width="361" height="218" alt="image" src="https://github.com/user-attachments/assets/cb111b7d-a316-4cb7-82d2-4978ab03d556" />
+</p>
 
 This final section checks whether the mapped source pixel lies within the input image boundaries. Pixels that map outside the image are set to black, while valid pixels copy their intensity from the input image. This prevents indexing errors and defines the background of the sheared image.
 
