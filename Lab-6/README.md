@@ -149,7 +149,7 @@ The same procedure is repeated for `template2.tif`. NCC works well when the temp
 
 ---
 
-Task 3: SIFT Feature Detection
+### Task 3: SIFT Feature Detection
 
 SIFT (Scale-Invariant Feature Transform) detects interest points that are stable across changes in scale, rotation, and illumination, making it far more powerful than NCC for general matching tasks.
 
@@ -199,7 +199,7 @@ The Van Gogh painting has highly textured brushwork with strong local contrast i
 
 ---
 
-Task 4: SIFT Matching - Scale and Rotation Invariance
+### Task 4: SIFT Matching - Scale and Rotation Invariance
 
 This task demonstrates that SIFT can match features between two versions of the same image at different scales, and even after rotation.
 
@@ -304,7 +304,7 @@ title('SIFT Rotation Invariance: Full vs 20-degree Rotated Half-size');
 
 ---
 
-Task 5: SIFT vs SURF
+### Task 5: SIFT vs SURF
 
 SIFT and SURF are compared on two successive frames of motorway traffic footage to evaluate their suitability for object tracking between video frames.
 
@@ -367,7 +367,7 @@ SURF (Speeded-Up Robust Features) approximates the SIFT approach using box filte
 
 ---
 
-Task 6: Image Recognition Using Neural Networks
+### Task 6: Image Recognition Using Neural Networks
 
 A pre-trained deep neural network is used to classify objects captured live from a webcam.
 
